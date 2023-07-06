@@ -6,6 +6,8 @@ Projeto proposto na plataforma DevClub para treino de JavaScript e lógica de pr
 
 🔗 [Clique aqui para acessar](https://alineguiseline.github.io/convert-money/)
 
+![Desktop](./assets/screen-capture.png)
+
 Obs.: Atualmente apenas em JavaScript Vanilla, mas a integração de API para correções monetárias em tempo real está sendo implementada ⌛
 
 ## Tecnologias utilizadas
