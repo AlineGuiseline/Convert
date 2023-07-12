@@ -1,17 +1,16 @@
 const convertButton = document.querySelector(".convert-button");
 const currencySelect = document.querySelector(".currency-select");
 
-function convertValues() {
+async function convertValues() {
   const inputCurrencyValue = document.querySelector(".input-currency").value;
   const currencyValueToConvert = document.querySelector(".currency-value-to-convert"); //Valor em real
   const currencyValueConverted = document.querySelector(".currency-value"); //Outras moedas
 
-  console.log(currencySelect.value);
+  const data = await fetch("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL").then(response => response.json())
 
-  const dolarToday = 5.2;
-  const euroToday = 6.2;
-  const bitcoinToday = 145.969;
-  const lbToday = 6.13;
+  const dolarToday = data.USDBRL.high
+  const euroToday = data.EURBRL.high
+  const bitcoinToday = data.BTCBRL.high
 
   if (currencySelect.value === "dolar") {
     currencyValueConverted.innerHTML = new Intl.NumberFormat("en-US", {
@@ -25,16 +24,10 @@ function convertValues() {
       currency: "EUR",
     }).format(inputCurrencyValue / euroToday);
   }
-  if (currencySelect.value === "libra") {
-    currencyValueConverted.innerHTML = new Intl.NumberFormat("en-GB", {
-      style: "currency",
-      currency: "GBP",
-    }).format(inputCurrencyValue / lbToday);
-  }
   if (currencySelect.value === "bitcoin") {
     currencyValueConverted.innerHTML = new Intl.NumberFormat("en-US", {
       style: "currency",
-      currency: "XBT",
+      currency: "BTC",
     }).format(inputCurrencyValue / bitcoinToday);
   }
 
@@ -58,11 +51,6 @@ function changeCurrency() {
         currencyName.innerHTML = "Euro"
         currencyImg.src = "../assets/euro.png"
         currencyValues.innerHTML = "0,00 €"
-    }
-    if (currencySelect.value === "libra") {
-      currencyName.innerHTML = "Libra"
-      currencyImg.src = "../assets/libra.png"
-      currencyValues.innerHTML = "0,00 £"
     }
     if (currencySelect.value === "bitcoin") {
       currencyName.innerHTML = "Bitcoin"
